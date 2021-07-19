@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import FirebaseContext from "../context/firebase";
 import * as ROUTES from '../constants/routes';
 
-export default function Login() {
+const Login = () => {
     const history = useHistory();
     const { firebase } = useContext(FirebaseContext);
 
@@ -82,3 +82,5 @@ export default function Login() {
         </div>
     )
 }
+
+export default Login;
