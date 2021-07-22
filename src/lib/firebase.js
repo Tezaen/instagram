@@ -20,6 +20,6 @@ const { FieldValue } = Firebase.firestore;
 // here I want to call the seed file (seed.js) ONLY ONCE!!!
 // seedDatabase(firebase);
 
-console.log('firebase', firebase);
+// console.log('firebase', firebase);
 
 export { firebase, FieldValue}
