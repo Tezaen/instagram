@@ -7,7 +7,6 @@ import * as ROUTES from '../constants/routes';
 const Header = () => {
     const { firebase } = useContext(FirebaseContext);
     const { user } = useContext(UserContext);
-
     return (
         <header className="h-16 bg-white border-b border-gray-primary mb-8">
             <div className="container mx-auto max-w-screen-lg h-full">
@@ -70,7 +69,7 @@ const Header = () => {
                                         <Link to={`/p/${user.displayName}`}>
                                             <img
                                                 className="rounded-full h-8 w-8 flex"
-                                                src={`/images/avatars/karl.jpg`}
+                                                src={`/images/avatars/${user.displayName}.jpg`}
                                                 alt={`${user.displayName} profile`}
                                             />
                                         </Link>
