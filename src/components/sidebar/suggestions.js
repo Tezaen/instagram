@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton';
 import { getSuggestedProfiles } from '../../services/firebase';
 import SuggestedProfile from './suggested-profile';
 
-const Suggestions = ({ userId, following }) => {
+const Suggestions = ({ userId, following, loggedInUserDocId }) => {
     const [profiles, setProfiles] = useState(null);
 
     // go and get the suggested profiles
@@ -18,15 +18,12 @@ const Suggestions = ({ userId, following }) => {
         if (userId) {
             suggestedProfiles();
         }
-
-        console.log('Suggested profiles', profiles);
     }, [userId]);
     // use the firebase service (call using userId)
     // getSuggestedProfiles
     // call the async func ^^^ within useEffect/when comp is rendered
     // store in state
     // go and render (wait on the profiles as in 'skeleton')
-    console.log('Suggested profiles again', profiles);
     return !profiles ? (
         <Skeleton count={10} height={150} className="mt-5" />
     ) : profiles.length > 0 ? (
@@ -34,9 +31,6 @@ const Suggestions = ({ userId, following }) => {
             <div className="text-sm flex items-center align-items justify-between mb-2">
                 <p className="font-bold text-gray-base">Suggestions for you</p>
             </div>
-            {
-                console.log('prof in return', profiles)
-            }
             <div className="mt-4 grid gap-5">
                 { profiles.map((profile) => (
                     <SuggestedProfile 
@@ -45,6 +39,7 @@ const Suggestions = ({ userId, following }) => {
                         username={profile.username}
                         profileId={profile.userId}
                         userId={userId}
+                        loggedInUserDocId={loggedInUserDocId}
                         />
                 ))}
             </div>
@@ -56,5 +51,6 @@ export default Suggestions
 
 Suggestions.propTypes = {
     userId: PropTypes.string,
-    following: PropTypes.array
+    following: PropTypes.array,
+    loggedInUserDocId: PropTypes.string
 }
