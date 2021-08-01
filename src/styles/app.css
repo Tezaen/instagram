@@ -13891,8 +13891,8 @@ video {
   background-origin: content-box;
 }
 
-.fill-current {
-  fill: currentColor;
+.fill-red {
+  fill: #ed4956;
 }
 
 .stroke-current {
@@ -31298,8 +31298,8 @@ video {
     background-origin: content-box;
   }
 
-  .sm\:fill-current {
-    fill: currentColor;
+  .sm\:fill-red {
+    fill: #ed4956;
   }
 
   .sm\:stroke-current {
@@ -48633,8 +48633,8 @@ video {
     background-origin: content-box;
   }
 
-  .md\:fill-current {
-    fill: currentColor;
+  .md\:fill-red {
+    fill: #ed4956;
   }
 
   .md\:stroke-current {
@@ -65968,8 +65968,8 @@ video {
     background-origin: content-box;
   }
 
-  .lg\:fill-current {
-    fill: currentColor;
+  .lg\:fill-red {
+    fill: #ed4956;
   }
 
   .lg\:stroke-current {
@@ -83303,8 +83303,8 @@ video {
     background-origin: content-box;
   }
 
-  .xl\:fill-current {
-    fill: currentColor;
+  .xl\:fill-red {
+    fill: #ed4956;
   }
 
   .xl\:stroke-current {
@@ -100638,8 +100638,8 @@ video {
     background-origin: content-box;
   }
 
-  .\32xl\:fill-current {
-    fill: currentColor;
+  .\32xl\:fill-red {
+    fill: #ed4956;
   }
 
   .\32xl\:stroke-current {

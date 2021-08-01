@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import { useState, useEffect, useContext } from 'react';
 import UserContext from '../context/user';
 import { getPhotos, getUserByUserId } from '../services/firebase';
 
@@ -18,10 +18,12 @@ const usePhotos = () => {
             if (following.length > 0) {
                 followedUserPhotos = await getPhotos(userId, following);
             }
+            followedUserPhotos.sort((a, b) => b.dateCreated - a.dateCreated);
+            setPhotos(followedUserPhotos);
         }
 
         getTimelinePhotos();
-    }, [])
+    }, [userId])
 
     return { photos };
 }

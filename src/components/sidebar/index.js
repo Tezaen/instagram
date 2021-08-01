@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import useUser from '../../hooks/use-user';
 import User from './user';
 import Suggestions from './suggestions';
@@ -7,8 +7,6 @@ const Sidebar = () => {
     const { 
         user: { docId, fullName, username, userId, following } 
     } = useUser();
-    
-    console.log(docId);
 
     return (
         <div className="p-4">
