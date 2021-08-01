@@ -18,7 +18,7 @@ const Suggestions = ({ userId, following, loggedInUserDocId }) => {
         if (userId) {
             suggestedProfiles();
         }
-    }, [userId]);
+    }, [userId, following]);
     // use the firebase service (call using userId)
     // getSuggestedProfiles
     // call the async func ^^^ within useEffect/when comp is rendered
