@@ -20,4 +20,4 @@ const useUser = () => {
     return { user: activeUser }
 }
 
-export default useUser
+export default useUser;

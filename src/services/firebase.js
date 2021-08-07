@@ -10,6 +10,21 @@ export async function doesUsernameExist(username) {
     return result.docs.length > 0
 }
 
+export async function getUserByUsername(username) {
+    const result = await firebase
+        .firestore()
+        .collection('users')
+        .where('username', '==', username)
+        .get();
+
+    const user = result.docs.map((item) => ({
+        ...item.data(),
+        docId: item.id
+    }));
+
+    return user;
+}
+
 // get user from the firestore where userId === userId (passed from AUTH)
 export async function getUserByUserId(userId) {
     const result = await firebase
@@ -70,6 +85,7 @@ export async function updateFollowedUserFollowers(
         });
 }
 
+// this is timeline specific
 export async function getPhotos(userId, following) {
 
     // get's all photo Docs where the photo's userId is in the following array
@@ -97,4 +113,36 @@ export async function getPhotos(userId, following) {
     );
 
     return photosWithUserDetails;
+}
+
+// this is params specific
+export async function getUserPhotosByUserId(userId) {
+    const result = await firebase
+        .firestore()
+        .collection('photos')
+        .where('userId', '==', userId)
+        .get();
+    
+    const photos = result.docs.map((item) => ({
+        ...item.data(),
+        docId: item.id
+    }));
+
+    return photos;
+}
+
+export async function isUserFollowingProfile(loggedInUserUsername, profileUserId) {
+    const result = await firebase
+        .firestore()
+        .collection('users')
+        .where('username', '==', loggedInUserUsername) // active user/current user
+        .where('following', 'array-contains', profileUserId)
+        .get();
+
+    const [response = {}] = result.docs.map((item) => ({
+        ...item.data(),
+        docId: item.id
+    }));
+
+    return response.userId;
 }
