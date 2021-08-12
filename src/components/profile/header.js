@@ -6,7 +6,7 @@ import { isUserFollowingProfile } from '../../services/firebase';
 
 const Header = ({ 
     photosCount, 
-    profile: { docId: profileDocId, userId: profileUserId, fullName, following = [], username: profileUsername}, 
+    profile: { docId: profileDocId, userId: profileUserId, fullName, following = [], followers = [], username: profileUsername}, 
     followerCount, 
     setFollowerCount 
 }) => {
@@ -15,12 +15,18 @@ const Header = ({
     const [isFollowingProfile, setIsFollowingProfile] = useState(false);
     const activeBtnFollow = user?.username && user?.username !== profileUsername;
 
-    const handleToggleFollow = () => 1;
+    const handleToggleFollow = () => {
+        setIsFollowingProfile((isFollowingProfile) => !isFollowingProfile);
+        setFollowerCount({
+            followerCount: isFollowingProfile ? followers.length - 1 : followers.length + 1
+        });
+        console.log('followerCount', followerCount);
+    };
 
     useEffect(() => {
         const isLoggedInUserFollowingProfile = async () => {
             const isFollowing = await isUserFollowingProfile(user.username, profileUserId);
-            setIsFollowingProfile(isFollowing);
+            setIsFollowingProfile(!!isFollowing);
         }
 
         if (user.username && profileUserId) {
@@ -49,6 +55,26 @@ const Header = ({
                         >
                             {isFollowingProfile ? 'Unfollow' : 'Follow'}
                         </button>
+                    )}
+                </div>
+                <div className="container flex mt-4">
+                    {followers === undefined || following === undefined ? (
+                        <Skeleton count={1} width={677} height={24} />
+                    ) : (
+                        <>
+                            <p className="mr-10">
+                                <span className="font-bold">{photosCount}</span>{`  `}
+                                photos
+                            </p>
+                            <p className="mr-10">
+                                <span className="font-bold">{followers.length}</span>{`  `}
+                                {followers.length === 1 ? `follower` : `followers`}
+                            </p>
+                            <p className="mr-10">
+                                <span className="font-bold">{following.length}</span>{`  `}
+                                following
+                            </p>
+                        </>
                     )}
                 </div>
             </div>
