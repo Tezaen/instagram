@@ -71,7 +71,7 @@ export async function updateLoggedInUserFollowing(
 
 export async function updateFollowedUserFollowers(
     profileDocId, // follower that current user follows/unfollows
-    loggedInUserId, // the user that I want to follow
+    loggedInUserId, // the user that I want to follow (Profile ID, not doc id)
     isFollowingProfile // true or false, am I following this person now
 ) {
     return firebase
@@ -145,4 +145,21 @@ export async function isUserFollowingProfile(loggedInUserUsername, profileUserId
     }));
 
     return response.userId;
+}
+
+export async function toggleFollow(
+    isFollowingProfile, 
+    activeUserDocId, 
+    profileDocId, 
+    profileUserId, 
+    followingUserId
+) {
+    // 1st param: karl's doc id (or logged in user's doc ID)
+    // 2nd param: raphael's user id  (The profile's userId [NOT the Doc ID])
+    // 3rd param: is the user following this profile? e.g. does karl follow raphael? (true/false)
+    await updateLoggedInUserFollowing(activeUserDocId, profileUserId, isFollowingProfile);
+    // 1st param: The doc id of the user that the current user wants to follow
+    // 2nd param: Current User's profile ID
+    // 3rd param: is the user following this profile? e.g. does karl follow raphael? (true/false)
+    await updateFollowedUserFollowers(profileDocId, followingUserId, isFollowingProfile);
 }
